@@ -1,22 +1,36 @@
-import React from 'react'
-import DeleteListButton from "./DeleteListButton"
-import Card from "./Card"
-import NewCardForm from "./NewCardForm"
+import React from 'react';
+import { useSelector } from 'react-redux';
+import DeleteListButton from "./DeleteListButton";
+import Card from "./Card";
+import NewCardForm from "./NewCardForm";
+import { RootState } from '../store';
 
-
-const List: React.FC = () => {
-  return (
-
-      <div className="group/list h-full min-w-44 p-4 z-0">
-        <DeleteListButton/>
-        <h3>To Do</h3>
-        <Card/>
-        <Card/>
-        <Card/>
-        <NewCardForm/>
-      </div>
-
-  )
+interface ListProps {
+    listId: string;
 }
 
-export default List
+const List: React.FC<ListProps> = ({ listId }) => {
+  const list = useSelector((state: RootState) =>
+    state.lists.lists.find(list => list.id === listId)
+  );
+
+  const cards = useSelector((state: RootState) => state.lists.cards);
+
+  if (!list) return null;
+
+  return (
+    <div className="group/list h-full min-w-44 p-4 z-0">
+      <DeleteListButton listId={listId}/>
+      <h3>{list.title}</h3>
+      {list.cardIds.map(cardId => {
+        const card = cards[cardId];
+        return (
+          <Card key={cardId} cardId={cardId} listId={listId} title={card.title} description={card.description} />
+        );
+      })}
+      <NewCardForm listId={listId}/>
+    </div>
+  );
+}
+
+export default List;
