@@ -6,8 +6,8 @@ import NewCardForm from "./NewCardForm"
 
 const List: React.FC = () => {
   return (
-    <div>
-      <div className="group/list h-full min-w-96 p-4">
+
+      <div className="group/list h-full min-w-44 p-4 z-0">
         <DeleteListButton/>
         <h3>To Do</h3>
         <Card/>
@@ -15,7 +15,7 @@ const List: React.FC = () => {
         <Card/>
         <NewCardForm/>
       </div>
-    </div>
+
   )
 }
 

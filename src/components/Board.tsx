@@ -2,7 +2,7 @@ import List from './List'
 
 const Board = () => {
   return (
-    <div className="m-auto h-screen w-screen overflow-x-scroll text-center flex flex-">
+    <div className="m-auto h-screen w-screen text-center flex overflow-x-scroll">
       <List/>
       <List/>
       <List/>
