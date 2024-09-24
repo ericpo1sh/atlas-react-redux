@@ -12,7 +12,7 @@ interface Card {
   description: string;
 }
 
-interface ListsState {
+export type ListsState = {
   lists: List[];
   cards: Record<string, Card>;
 }
@@ -67,10 +67,7 @@ export const listsSlice = createSlice({
       const destinationList = state.lists.find(list => list.id === destinationListId);
     
       if (sourceList && destinationList) {
-        // Remove the card from the source list
         sourceList.cardIds = sourceList.cardIds.filter(id => id !== cardId);
-    
-        // Add the card to the destination list
         destinationList.cardIds.push(cardId);
       }
     },
